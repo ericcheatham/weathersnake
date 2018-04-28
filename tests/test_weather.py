@@ -1,13 +1,11 @@
 import unittest
-
+import responses
 import weather
 
-from mock import Mock, MagicMock, patch
 
-import responses
-import requests
-
-
+API_KEY = 'e7d99fbae935d84dafae9ba51bc49270'
+DEFAULT_WEATHER_UNITS = 'imperial'
+WEATHER_URL = 'https://api.openweathermap.org/data/2.5/weather'
 
 
 class TestWeatherAPI(unittest.TestCase):
@@ -17,10 +15,14 @@ class TestWeatherAPI(unittest.TestCase):
         """
         Given a zip code, make a sucessful request
         """
-        url = weather.weather.WEATHER_URL
+        url = WEATHER_URL + "?zip={}&APPID={}".format(
+            23602,
+            API_KEY
+        )
+
         responses.add(
             responses.GET,
-            'https://api.openweathermap.org/data/2.5/weather?units=imperial&zip=23602&APPID=e7d99fbae935d84dafae9ba51bc49270',
+            url,
             status=200,
             body={}
         )
@@ -35,10 +37,15 @@ class TestWeatherAPI(unittest.TestCase):
         """
         Given a zip code, fail the request
         """
-        url = weather.weather.WEATHER_URL
+
+        url = WEATHER_URL + "?zip={}&APPID={}".format(
+            12345,
+            API_KEY
+        )
+
         responses.add(
             responses.GET,
-            'https://api.openweathermap.org/data/2.5/weather?units=imperial&zip=12345&APPID=e7d99fbae935d84dafae9ba51bc49270',
+            url,
             status=404,
             json={'error': 'city not found'}
         )
