@@ -12,6 +12,6 @@ setup(
         'requests[security]',
     ],
     entry_points={
-        'console_scripts' : ['weather = weather.cli:main']
+        'console_scripts': ['weather = weather.cli:main']
     }
 )

@@ -1,7 +1,4 @@
 import requests
-import pprint
-
-from flask import Flask
 
 
 API_KEY = 'e7d99fbae935d84dafae9ba51bc49270'
@@ -16,7 +13,7 @@ def fetch_weather(location, units=None):
 
     payload = {
         'APPID': API_KEY,
-        'zip': location ,
+        'zip': location,
         'units': units or DEFAULT_WEATHER_UNITS
     }
 
