@@ -6,6 +6,7 @@ DEFAULT_WEATHER_UNITS = 'imperial'
 WEATHER_URL = 'https://api.openweathermap.org/data/2.5/weather'
 
 
+
 def fetch_weather(location, units=None):
     """
     Given a location, return the current weather in that location

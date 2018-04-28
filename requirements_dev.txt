@@ -1,5 +1,6 @@
 flake8>=3.4.1
 mock==2.0.0
 nose2==0.6.5
+responses
 
 -r requirements.txt
