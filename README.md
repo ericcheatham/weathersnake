@@ -1,5 +1,5 @@
 # weathersnake
-What's the current weather in your area?
+What is the current weather in your area?
 
 Weathersnake uses the API from openweathermap to return the current temperature in a specific area
 

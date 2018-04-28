@@ -3,6 +3,5 @@ language: python
 install:
   - pip install -r requirements_dev.txt
 
- script:
-   - flake8
-   - nose2
+script:
+  - flake8
