@@ -5,3 +5,4 @@ install:
 
 script:
   - flake8
+  - nose2
