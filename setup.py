@@ -5,10 +5,9 @@ setup(
     version='0.0.1',
     description='Python tool to find the weather',
     author='Eric Cheatham',
-    packages=find_packages('./weather'),
+    packages=find_packages(),
     include_package_data=True,
     install_requires=[
-        'flask',
         'googlemaps',
         'requests[security]',
     ],
