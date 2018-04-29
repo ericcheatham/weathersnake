@@ -42,8 +42,6 @@ class TestWeatherAPI(unittest.TestCase):
         mock_goog.assert_called_once_with('fake_location')
         self.assertFalse(res)
 
-
-
     def test_fetch_weather_invalid_input(self):
         """
         Given an invalid input, assert that we get a
@@ -87,7 +85,6 @@ class TestWeatherAPI(unittest.TestCase):
         self.assertEqual(res[0], 200)
         self.assertEqual(res[1], {})
 
-
     @patch('weather.weather.googlemaps.Client.geocode')
     def test_fetch_weather_bad_location(self, mock_goog):
         """
@@ -98,4 +95,4 @@ class TestWeatherAPI(unittest.TestCase):
         res = weather.fetch_weather('Fake City, Fake State')
 
         mock_goog.assert_called_once_with('Fake City, Fake State')
-        self.assertFalse(False)
+        self.assertFalse(res)
