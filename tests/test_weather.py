@@ -2,7 +2,7 @@ import unittest
 import responses
 import weather
 
-from mock import Mock, MagicMock, patch
+from mock import patch
 
 
 API_KEY = 'e7d99fbae935d84dafae9ba51bc49270'
