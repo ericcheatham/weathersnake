@@ -2,6 +2,8 @@ import unittest
 import responses
 import weather
 
+from mock import Mock, MagicMock, patch
+
 
 API_KEY = 'e7d99fbae935d84dafae9ba51bc49270'
 DEFAULT_WEATHER_UNITS = 'imperial'
@@ -10,14 +12,55 @@ WEATHER_URL = 'https://api.openweathermap.org/data/2.5/weather'
 
 class TestWeatherAPI(unittest.TestCase):
 
+    def test_validate_input(self):
+        """
+        Given a location string, validate that the
+        input is in the form of <CITY>,<STATE/COUNTRY>
+        """
+        self.assertTrue(weather.weather.validate_input('Des Moines, IA'))
+        self.assertFalse(weather.weather.validate_input('Des Moines'))
+        self.assertFalse(weather.weather.validate_input(''))
+        self.assertFalse(weather.weather.validate_input('Des Moines, IA, FOO'))
+
+    @patch('weather.weather.googlemaps.Client.geocode')
+    def test_get_lat_lon(self, mock_goog):
+        """
+        Assert that the geocode library is called with
+        the expected input
+        """
+        weather.weather.get_lat_lon('location')
+        mock_goog.assert_called_once_with('location')
+
+    def test_fetch_weather_invalid_input(self):
+        """
+        Given an invalid input, assert that we get a
+        false return value
+        """
+        self.assertFalse(weather.weather.fetch_weather(''))
+        self.assertFalse(weather.weather.fetch_weather('FOO BAR'))
+        self.assertFalse(weather.weather.fetch_weather('FOO, BAR, BAZ'))
+
     @responses.activate
-    def test_weather_by_zip(self):
+    @patch('weather.weather.googlemaps.Client.geocode')
+    def test_fetch_weather(self, mock_goog):
         """
-        Given a zip code, make a sucessful request
+        Given a valid location return both a response code and
+        a JSON blob
         """
-        url = WEATHER_URL + "?zip={}&APPID={}".format(
-            23602,
-            API_KEY
+        mock_goog.return_value = [{
+            "geometry": {
+                "location": {
+                    "lat": 38.8910644,
+                    "lng": -77.032614
+                }
+            }
+        }]
+
+        url = WEATHER_URL + "?lat={}&lon={}&APPID={}&units={}".format(
+            38.8910644,
+            -77.032614,
+            API_KEY,
+            'imperial'
         )
 
         responses.add(
@@ -27,30 +70,6 @@ class TestWeatherAPI(unittest.TestCase):
             body={}
         )
 
-        res = weather.fetch_weather(23602)
-
+        res = weather.fetch_weather('Des Moines, IA')
         self.assertEqual(res[0], 200)
         self.assertEqual(res[1], {})
-
-    @responses.activate
-    def test_weather_by_zip_4xx(self):
-        """
-        Given a zip code, fail the request
-        """
-
-        url = WEATHER_URL + "?zip={}&APPID={}".format(
-            12345,
-            API_KEY
-        )
-
-        responses.add(
-            responses.GET,
-            url,
-            status=404,
-            json={'error': 'city not found'}
-        )
-
-        res = weather.fetch_weather(12345)
-
-        self.assertEqual(res[0], 404)
-        self.assertEqual(res[1], {u'error': u'city not found'})
