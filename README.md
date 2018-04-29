@@ -1,5 +1,4 @@
-![](https://travis-ci.org/ericcheatham/weathersnake.svg?branch=master)
-
+[![Build Status](https://travis-ci.org/ericcheatham/weathersnake.svg?branch=master)](https://travis-ci.org/ericcheatham/weathersnake)
 # weathersnake
 What is the current weather in your area?
 
