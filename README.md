@@ -17,7 +17,7 @@ It is highly recommended that you run this in a [virtual environment](https://vi
 
 ## Running Weathersnake
 
-```bash
+```
 usage: weather [-h] [--format {metric,kelvin,imperial}]
 
 Python based temperature app
