@@ -1,3 +1,2 @@
-flask
 googlemaps
 requests[security]==2.18.4
