@@ -46,6 +46,10 @@ def main():
         location = raw_input(CITY_PROMPT)
         weather = fetch_weather(location, args.format)
 
+        if not weather:
+            print('Input location as "<CITY>,<STATE/COUNTRY>"')
+            continue
+
         if weather[0] != 200:
             print('Unable to determine weather in {}'.format(location))
         else:
