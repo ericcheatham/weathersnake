@@ -22,8 +22,12 @@ def get_lat_lon(location):
     """
     Given an address, get the lat and lon back
     """
-    res = _gmaps.geocode(location)[0]
-    return res.get('geometry')
+    res = _gmaps.geocode(location)
+
+    if res:
+        res = res[0]
+        return res.get('geometry')
+    return False
 
 
 def fetch_weather(location, units=None):
@@ -33,13 +37,14 @@ def fetch_weather(location, units=None):
 
     if validate_input(location):
         geo = get_lat_lon(location)
-        payload = {
-            'APPID': API_KEY,
-            'lat': geo['location']['lat'],
-            'lon': geo['location']['lng'],
-            'units': units or DEFAULT_WEATHER_UNITS
-        }
+        if geo:
+            payload = {
+                'APPID': API_KEY,
+                'lat': geo['location']['lat'],
+                'lon': geo['location']['lng'],
+                'units': units or DEFAULT_WEATHER_UNITS
+            }
 
-        resp = requests.get(WEATHER_URL, params=payload)
-        return resp.status_code, resp.json()
+            resp = requests.get(WEATHER_URL, params=payload)
+            return resp.status_code, resp.json()
     return False

@@ -9,6 +9,10 @@ __all__ = [
 
 CITY_PROMPT = 'Where are you? '
 REPORT_FORMAT = '{} weather:\n {} degrees {}'
+INSTRUCTIONS = """
+Find out the current temperature. Input location as
+"<CITY>,<STATE/COUNTRY>" Enter "quit" to quit\n
+"""
 
 UNITS = {
     'metric': 'Celsius',
@@ -42,7 +46,7 @@ def main():
 
     args = parser.parse_args()
 
-    print('Find out the current temperature. Enter "quit" to quit\n')
+    print(INSTRUCTIONS)
     try:
         while True:
             location = raw_input(CITY_PROMPT)
@@ -52,11 +56,8 @@ def main():
                 break
 
             if not weather:
-                print('Input location as "<CITY>,<STATE/COUNTRY>"')
-                continue
-
-            if weather[0] != 200:
                 print('Unable to determine weather in {}'.format(location))
+                continue
             else:
                 temp = weather[1]['main']['temp']
                 unit = UNITS[args.format or 'imperial']
