@@ -8,6 +8,7 @@ Weathersnake uses the API from openweathermap to return the current temperature 
 It is highly recommended that you run this in a [virtual environment](https://virtualenvwrapper.readthedocs.io/en/latest/#)
 
 #### Installing from source (installs as a developer instance)
+- Clone repository to your local development environment
 - `pip install -e .`
 
 

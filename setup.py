@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='weathersnake',
-    version='0.0.1',
+    version='0.0.2',
     description='Python tool to find the weather',
     author='Eric Cheatham',
     packages=find_packages(),
