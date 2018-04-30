@@ -11,11 +11,6 @@ It is highly recommended that you run this in a [virtual environment](https://vi
 - Clone repository to your local development environment
 - `pip install -e .`
 
-
-#### Normal installation (WIP)
-- `pip install weathersnake`
-
-
 ## Running Weathersnake
 
 ```
