@@ -1,10 +1,14 @@
 from setuptools import setup, find_packages
 
 
+with open('README.rst') as file:
+    long_description = file.read()
+
 setup_args = dict(
     name='weathersnake',
-    version='0.0.6',
+    version='0.0.7',
     description='Python tool to find the weather',
+    long_description=long_description,
     author='Eric Cheatham',
     packages=find_packages(exclude=['tests']),
     include_package_data=True,
