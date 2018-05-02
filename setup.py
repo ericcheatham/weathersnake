@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup_args = dict(
     name='weathersnake',
-    version='0.0.4',
+    version='0.0.6',
     description='Python tool to find the weather',
     author='Eric Cheatham',
     packages=find_packages(exclude=['tests']),
