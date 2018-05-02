@@ -1,4 +1,5 @@
-`Build Status`_
+.. image:: https://travis-ci.org/ericcheatham/weathersnake.svg?branch=master
+    :target: https://travis-ci.org/ericcheatham/weathersnake
 
 weathersnake
 ============
@@ -49,5 +50,4 @@ Issues?
 
 Please open an issue here on the repo
 
-.. _Build Status: https://travis-ci.org/ericcheatham/weathersnake
 .. _virtual environment: https://virtualenvwrapper.readthedocs.io/en/latest/#
