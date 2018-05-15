@@ -1,13 +1,14 @@
+import os
+
 import requests
 import googlemaps
 
 
-API_KEY = 'e7d99fbae935d84dafae9ba51bc49270'
 DEFAULT_WEATHER_UNITS = 'imperial'
 WEATHER_URL = 'https://api.openweathermap.org/data/2.5/weather'
 
 
-_gmaps = googlemaps.Client(key='AIzaSyByfGh6kuUNv31QHPWj6esmO94NkOQebrM')
+_gmaps = googlemaps.Client(key=os.environ['GOOGLE_MAPS_API'])
 
 
 def validate_input(location):
@@ -39,7 +40,7 @@ def fetch_weather(location, units=None):
         geo = get_lat_lon(location)
         if geo:
             payload = {
-                'APPID': API_KEY,
+                'APPID': os.environ['WEATHER_API'],
                 'lat': geo['location']['lat'],
                 'lon': geo['location']['lng'],
                 'units': units or DEFAULT_WEATHER_UNITS
